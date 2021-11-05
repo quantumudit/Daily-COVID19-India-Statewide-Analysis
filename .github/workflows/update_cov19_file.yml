@@ -3,7 +3,7 @@ name: india-cov19-statewide-current-status-update
 on:
   push: # run jobs on push for testing purposes only.
   schedule:
-    - cron: "0 5,16 * * *" # runs at 5:00 AM UTC (10.30 AM IST) & 4:00 PM UTC (9.30 PM IST) everyday
+    - cron: "0 6,16 * * *" # runs at 5:00 AM UTC (11.30 AM IST) & 4:00 PM UTC (9.30 PM IST) everyday
 
 jobs:
   build:
