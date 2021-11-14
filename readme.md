@@ -2,7 +2,7 @@
 
 ---
 
-<h4 align="center">Analyzing daily statewide COVID-19 cases in India by extracting data from <a href="https://www.mohfw.gov.in/" target="_blank">Ministry of Health & Family Welfare</a> website with <a href="https://www.beerwulf.com/en-gb/c/all-beers" target="_blank">Python</a> and <a href="https://en.wikipedia.org/wiki/Microsoft_Power_BI" target="_blank">Power BI</a></h4>
+<h4 align="center">Analyzing daily statewide COVID-19 cases in India by extracting data from <a href="https://www.mohfw.gov.in/" target="_blank">Ministry of Health & Family Welfare</a> website with <a href="https://en.wikipedia.org/wiki/Python_(programming_language)" target="_blank">Python</a> and <a href="https://en.wikipedia.org/wiki/Microsoft_Power_BI" target="_blank">Power BI</a></h4>
 
 <p align='center'>
 <img src='05_RESOURCES/built-with-love.svg'>
@@ -21,7 +21,7 @@
 
 ## Overview
 
-This project focuses on getting the daily India statewide COVID-19 data from [Ministry of Health & Family Welfare](https://www.mohfw.gov.in/), performing exploratory data analysis to generate insights and visualize them with the help of Power BI.
+This project focuses on getting the daily India statewide COVID-19 data from [Ministry of Health & Family Welfare][website_link], performing exploratory data analysis to generate insights and visualize them with the help of Power BI.
 
 The repository directory structure is as follows:
 
@@ -91,7 +91,7 @@ To be updated.
 
 If you have any doubts, queries or, suggestions then, please connect with me in any of the following platforms:
 
-[![Linkedin Badge][linkedinbadge]][linkedin] [![Twitter Badge](https://img.shields.io/badge/-@quantumudit-1ca0f1?style=flat&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/quantumudit)][twitter]
+[![Linkedin Badge][linkedinbadge]][linkedin] [![Twitter Badge][twitterbadge]][twitter]
 
 If you like my work then, you may support me at Patreon:
 
@@ -115,7 +115,7 @@ This license allows reusers to distribute, remix, adapt, and build upon the mate
 
 <!-- External Links -->
 
-[website_link]: https://www.accommodationforstudents.com/search-results?location=any&beds=0&searchType=any&price=&lettingPeriod=academicYear&geo=false&page=1
+[website_link]: https://www.mohfw.gov.in/
 
 <!-- Profile Links -->
 
