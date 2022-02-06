@@ -6,64 +6,53 @@
 
 import requests
 import pandas as pd
-import datetime
+from datetime import datetime, timezone, timedelta
 
 DATA_URL = 'http://www.mohfw.gov.in/data/datanew.json'
 
 response = requests.get(DATA_URL)
 json_data = response.json()
 
+all_states_covid_data = []
 
-raw_data = pd.json_normalize(json_data)
+ist_timezone = timezone(timedelta(hours=5.5))
+current_ist_timestamp = datetime.now(ist_timezone).strftime('%d-%b-%Y %H:%M:%S')
 
-states_filter = (raw_data['state_name'] != '')
+for item in json_data:
+    state_code = item["state_code"]
+    state_name = item["state_name"].replace('***','').strip()
+    active = item["active"]
+    positive = item["positive"]
+    cured = item["cured"]
+    death = item["death"]
+    new_active = item["new_active"]
+    new_positive = item["new_positive"]
+    new_cured = item["new_cured"]
+    new_death = item["new_death"]
+    
+    state_details = {
+        'StateCode': state_code,
+        'State Name': state_name,
+        'Active Cases (Yesterday)': active,
+        'Positive Cases (Yesterday)': positive,
+        'Cured Cases (Yesterday)': cured,
+        'Death Cases (Yesterday)': death,
+        'Active Cases (Today)': new_active,
+        'Positive Cases (Today)': new_positive,
+        'Cured Cases (Today)': new_cured,
+        'Death Cases (Today)': new_death,
+        'Last Updated (IST)': current_ist_timestamp
+    }
+    
+    if state_name != '':
+        all_states_covid_data.append(state_details)
+    else:
+        continue
 
-raw_data_1 = raw_data[states_filter]
+# Exporting data to flatfile #
+# -------------------------- #
 
-new_cols = [
-    'SNo.',
-    'State Name',
-    'Active Cases (Yesterday)',
-    'Positive Cases (Yesterday)',
-    'Cured Cases (Yesterday)',
-    'Death Cases (Yesterday)',
-    'Active Cases (Today)',
-    'Positive Cases (Today)',
-    'Cured Cases (Today)',
-    'Death Cases (Today)',
-    'StateCode'
-]
-
-raw_data_1.columns = new_cols
-
-reordered_cols = [
-    'SNo.',
-    'StateCode',
-    'State Name',
-    'Active Cases (Yesterday)',
-    'Positive Cases (Yesterday)',
-    'Cured Cases (Yesterday)',
-    'Death Cases (Yesterday)',
-    'Active Cases (Today)',
-    'Positive Cases (Today)',
-    'Cured Cases (Today)',
-    'Death Cases (Today)'
-]
-
-raw_data_2 = raw_data_1.reindex(columns = reordered_cols)
-raw_data_3 = raw_data_2.set_index('SNo.')
-
-# Adding current date time to show a last-updated column:
-
-current_datetime = datetime.datetime.now(datetime.timezone.utc)
-formatted_datetime = current_datetime.strftime('%d-%b-%Y %H:%M:%S')
-
-raw_data_3['Last Updated (UTC)'] = formatted_datetime
-
-clean_data = raw_data_3.sort_index()
-
-# Dumping data into a csv file:
-
-clean_data.to_csv('../02_DATA/india_statewide_daily_covid_data.csv', index=True)
+statewide_covid_df = pd.DataFrame(all_states_covid_data)
+statewide_covid_df.to_csv('../02_DATA/india_statewide_daily_covid_data.csv', index=False)
 
 # ------ End of Program ----- #
